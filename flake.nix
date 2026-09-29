@@ -30,6 +30,7 @@
 
           # Build a Hoogle index. To start it, run: 
           # `nix develop -c hoogle server --local --port 8080`
+          returnShellEnv = true;
           withHoogle = true;
 
           modifier = drv: 
@@ -54,6 +55,7 @@
         # Create a package that outputs the binary executable at ./result/bin/
         packages.default = haskellPackages.developPackage {
           root = ./.;
+          returnShellEnv = false;
           withHoogle = false;
         };
       });

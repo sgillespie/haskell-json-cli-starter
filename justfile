@@ -21,3 +21,7 @@ dist:
 # Run the static analyzers (hlint)
 lint:
     hlint .
+
+# Run a local hoogle server
+hoogle:
+    hoogle server --local --port 8000
