@@ -1,0 +1,43 @@
+cabal-version:      3.0
+name:               haskell-json-cli-starter
+version:            0.1.0.0
+synopsis:           A walking-skeleton starter for Haskell JSON CLI tools
+homepage:           https://github.com/sgillespie/haskell-json-cli-starter
+license:            MIT
+license-file:       LICENSE
+author:             Sean Gillespie
+maintainer:         sean@mistersg.net
+copyright:          2026 Sean Gillespie
+category:           Text
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  MyLib
+    build-depends:    base ^>=4.18.3.0
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+executable haskell-json-cli-starter
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.18.3.0,
+        haskell-json-cli-starter
+
+    hs-source-dirs:   app
+    default-language: GHC2021
+
+test-suite haskell-json-cli-starter-test
+    import:           warnings
+    default-language: GHC2021
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.18.3.0,
+        haskell-json-cli-starter
