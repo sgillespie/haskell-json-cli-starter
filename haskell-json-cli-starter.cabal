@@ -11,32 +11,48 @@ copyright: 2026 Sean Gillespie
 category: Text
 build-type: Simple
 
-common warnings
+common common-options
   ghc-options: -Wall
-
-library
-  import: warnings
-  exposed-modules: MyLib
-  build-depends: base <5
-  hs-source-dirs: src
-  default-language: GHC2021
-
-executable haskell-json-cli-starter
-  import: warnings
-  main-is: Main.hs
   build-depends:
     base <5,
+    aeson,
+    aeson-pretty,
+    bytestring,
+    containers,
+    vector,
+    text,
+
+  default-extensions:
+    DeriveAnyClass
+    DerivingStrategies
+    LambdaCase
+    OverloadedStrings
+    RecordWildCards
+
+  default-language: GHC2021
+
+library
+  import: common-options
+  exposed-modules: Lib
+  hs-source-dirs: src
+
+executable starter
+  import: common-options
+  main-is: Main.hs
+  build-depends:
     haskell-json-cli-starter,
+    optparse-applicative
 
   hs-source-dirs: app
-  default-language: GHC2021
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
 
 test-suite haskell-json-cli-starter-test
-  import: warnings
-  default-language: GHC2021
+  import: common-options
   type: exitcode-stdio-1.0
   hs-source-dirs: test
   main-is: Main.hs
   build-depends:
-    base <5,
-    haskell-json-cli-starter,
+    haskell-json-cli-starter

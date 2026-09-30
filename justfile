@@ -8,7 +8,7 @@ build:
 
 # Run the executable (`just run -- --help`)
 run *args:
-    cabal run "haskell-json-cli-starter:exe:haskell-json-cli-starter" -- {{ args }}
+    cabal run "haskell-json-cli-starter:exe:starter" -- {{ args }}
 
 # Run the test suite
 test:
