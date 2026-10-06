@@ -8,7 +8,7 @@ build:
 
 # Run the executable (`just run -- --help`)
 run *args:
-    cabal run "haskell-json-cli-starter:exe:starter" -- {{ args }}
+    cabal run "json-demo:exe:json-demo" -- {{ args }}
 
 # Run the test suite
 test:
@@ -18,9 +18,19 @@ test:
 dist:
     nix build .\#
 
-# Run the static analyzers (hlint)
-lint:
+# Run static analyzers and formatter checks
+check:
     hlint .
+    fourmolu --mode check app src test
+    cabal-gild --mode check --input json-demo.cabal
+    alejandra --check flake.nix
+    just test
+
+# Run formatters
+fmt:
+  fourmolu --mode inplace app src test
+  cabal-gild --mode format --io json-demo.cabal
+  alejandra flake.nix
 
 # Run a local hoogle server
 hoogle:

@@ -1,5 +1,5 @@
 cabal-version: 3.0
-name: haskell-json-cli-starter
+name: json-demo
 version: 0.1.0.0
 synopsis: A walking-skeleton starter for Haskell JSON CLI tools
 homepage: https://github.com/sgillespie/haskell-json-cli-starter
@@ -10,17 +10,20 @@ maintainer: sean@mistersg.net
 copyright: 2026 Sean Gillespie
 category: Text
 build-type: Simple
+data-files:
+  test/data/example.json
 
 common common-options
   ghc-options: -Wall
   build-depends:
-    base <5,
     aeson,
     aeson-pretty,
+    base <5,
     bytestring,
     containers,
-    vector,
     text,
+    time,
+    vector,
 
   default-extensions:
     DeriveAnyClass
@@ -36,12 +39,12 @@ library
   exposed-modules: Lib
   hs-source-dirs: src
 
-executable starter
+executable json-demo
   import: common-options
   main-is: Main.hs
   build-depends:
-    haskell-json-cli-starter,
-    optparse-applicative
+    json-demo,
+    optparse-applicative,
 
   hs-source-dirs: app
   ghc-options:
@@ -49,10 +52,15 @@ executable starter
     -rtsopts
     -with-rtsopts=-N
 
-test-suite haskell-json-cli-starter-test
+test-suite json-test
   import: common-options
   type: exitcode-stdio-1.0
   hs-source-dirs: test
   main-is: Main.hs
+  other-modules:
+    Paths_json_demo
+
   build-depends:
-    haskell-json-cli-starter
+    hspec,
+    hspec-expectations,
+    json-demo,
